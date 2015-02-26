@@ -33,10 +33,6 @@ browserifyTask = (callback, devMode) ->
 					stream: true
 				)
 
-		b = watchify(b)
-		b.on 'update', bundle
-		bundleLogger.watch(bundleConfig.outputName)
-
 		reportFinished = ->
 			bundleLogger.end(bundleConfig.outputName)
 
