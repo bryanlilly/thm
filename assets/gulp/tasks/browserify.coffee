@@ -1,11 +1,12 @@
 browserify   = require 'browserify'
 browserSync  = require 'browser-sync'
-watchify     = require 'watchify'
+# watchify     = require 'watchify'
 bundleLogger = require '../util/bundleLogger'
 gulp         = require 'gulp'
 handleErrors = require '../util/handleErrors'
 source       = require 'vinyl-source-stream'
 config       = require('../config').browserify
+rename		 = require 'gulp-rename'
 _            = require 'lodash'
 
 browserifyTask = (callback, devMode) ->
@@ -27,11 +28,16 @@ browserifyTask = (callback, devMode) ->
 				.bundle()
 				.on 'error', handleErrors
 				.pipe(source(bundleConfig.outputName))
+				.pipe rename 'bld.min.js'
 				.pipe(gulp.dest(bundleConfig.dest))
 				.on 'end', reportFinished
 				.pipe(browserSync.reload
 					stream: true
 				)
+
+		# b = watchify(b)
+		# b.on 'update', bundle
+		# bundleLogger.watch(bundleConfig.outputName)
 
 		reportFinished = ->
 			bundleLogger.end(bundleConfig.outputName)

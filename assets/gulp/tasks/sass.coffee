@@ -6,6 +6,7 @@ handleErrors = require('../util/handleErrors')
 config       = require('../config').sass
 autoprefixer = require('gulp-autoprefixer')
 neat 		 = require('node-neat').includePaths
+rename		 = require('gulp-rename')
 
 gulp.task 'sass', ->
 	return gulp.src('styl/src/screen.scss')
@@ -21,5 +22,6 @@ gulp.task 'sass', ->
 		)
 		.pipe(sourcemaps.write())
 		.on('error', handleErrors)
+		.pipe rename 'screen.min.css'
 		.pipe(gulp.dest(config.dest))
 		.pipe(browserSync.reload({stream:true}))
