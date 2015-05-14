@@ -43,3 +43,7 @@ img {
 	max-width: 74rem;
 	padding: 0 5rem;
 }
+
+section {
+	@import row();
+}

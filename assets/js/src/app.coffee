@@ -1,22 +1,25 @@
+ #*--------------------------------------------------------#
+  # Global Object Variables
+#*--------------------------------------------------------#
+getByClass =
+    header: document.getElementsByClassName('header')[0]
+    footer: document.getElementsByClassName('footer')[0]
+    wrapper: document.getElementsByClassName('wrapper')[0]
+
+location =
+    protocol: window.location.protocol
+    host: window.location.host
+    path: window.location.pathname
+
 #*--------------------------------------------------------#
   # Requires
 #*--------------------------------------------------------#
-#classie = require 'classie'
-#_ 		= require 'lodash'
-modal 	= require 'kbd-modal'.Modal
-header 	= require './lib/header'
-
-#*--------------------------------------------------------#
-  # Location Variables
-#*--------------------------------------------------------#
-protocol = window.location.protocol
-host = window.location.host
-path = window.location.pathname
-  
-#*--------------------------------------------------------#
-  # Clean Load
-#*--------------------------------------------------------#
-wrapper = document.getElementsByClassName('wrapper')[0]
+classie    = require 'classie'
+_          = require 'lodash'
+modal      = require 'kbd-modal'.Modal
+header     = require './lib/header'
+typography = require './lib/typography'
+utils      = require './lib/utils'
 
 #*--------------------------------------------------------#
   # Inits

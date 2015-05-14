@@ -5,10 +5,10 @@ sourcemaps   = require('gulp-sourcemaps')
 handleErrors = require('../util/handleErrors')
 config       = require('../config').sass
 autoprefixer = require('gulp-autoprefixer')
-neat 		 = require('node-neat').includePaths
+rename		 = require 'gulp-rename'
+minifyCSS    = require 'gulp-minify-css'
+neat		 = require('node-neat').includePaths
 modal		 = require('kbd-modal').includePaths
-rename		 = require('gulp-rename')
-minify		 = require('gulp-minify-css')
 
 gulp.task 'sass', ->
 	return gulp.src('styl/src/screen.scss')
@@ -17,14 +17,13 @@ gulp.task 'sass', ->
 			sourceComments: 'map'
 			imagePath: '/img'
 			errLogToConsole: true
-			includePaths: ['sass'].concat(neat).concat(modal)
+			includePaths: ['sass'].concat(modal).concat(neat)
 		)
 		.pipe(autoprefixer
 			browsers: ['last 2 version'] 
 		)
+		.pipe(minifyCSS())
 		.pipe(sourcemaps.write())
 		.on('error', handleErrors)
-		.pipe minify()
-		.pipe rename 'screen.min.css'
 		.pipe(gulp.dest(config.dest))
 		.pipe(browserSync.reload({stream:true}))
